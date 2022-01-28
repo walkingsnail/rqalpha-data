@@ -31,8 +31,9 @@ class DataSource(DataProxy):
             self.update(skip_last_date_check=True)
 
         from rqalpha.data.base_data_source import BaseDataSource
-        data_source = BaseDataSource(data_bundle_path)
-        super(DataSource, self).__init__(data_source)
+        data_source = BaseDataSource(data_bundle_path, {})
+        from rqalpha.data.bar_dict_price_board import BarDictPriceBoard
+        super(DataSource, self).__init__(data_source, BarDictPriceBoard)
 
         self._last_date_date = None
         self.get_data_last_date()
