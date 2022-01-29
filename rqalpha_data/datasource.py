@@ -77,15 +77,17 @@ class DataSource(DataProxy):
                 if date == last_trading_day:
                     return date  # 数据已经是最新无需下载
                     # basic_system_log.debug('need update data bundle to ' + date.strftime('%Y-%m-%d'))
+                else:
+                    return date
 
-        data_bundle_path = self._data_bundle_path
-        data_bundle_path = data_bundle_path[:len(data_bundle_path) - len('/bundle')]
-        from rqalpha import main
-        main.update_bundle(data_bundle_path=data_bundle_path)
+        # data_bundle_path = self._data_bundle_path
+        # data_bundle_path = data_bundle_path[:len(data_bundle_path) - len('/bundle')]
+        # from rqalpha import main
+        # main.update_bundle(data_bundle_path=data_bundle_path)
 
-        if not skip_last_date_check:
-            date = self.get_data_last_date()
-            return date
+        # if not skip_last_date_check:
+        #     date = self.get_data_last_date()
+        #     return date
 
     def get_bar(self, order_book_id, dt, frequency='1d'):
         order_book_id = to_order_book_id(order_book_id)
